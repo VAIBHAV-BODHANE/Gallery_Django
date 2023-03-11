@@ -24,13 +24,15 @@ class GalleryPostSerializer(serializers.ModelSerializer):
 
     # user = serializers.RelatedField(source='UserGallery', read_only=True)
     # image_post = serializers.RelatedField(source='UserGallery', allow_null=True)
+    # video_post = serializers.RelatedField(source='UserGallery', allow_null=True)
+    # post_caption = serializers.RelatedField(source='UserGallery', allow_null=True)
 
     class Meta:
         model = UserGallery
-        fields = ['id', 'user', 'image_post', 'video_post', 'caption']
+        fields = '__all__'
         extra_kwargs = {
             'user': {'read_only': True},
             'image_post': {'allow_null': True},
             'video_post': {'allow_null': True},
-            'caption': {'allow_null': True}
+            'post_caption': {'allow_null': True}
         }
