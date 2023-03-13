@@ -96,7 +96,7 @@ class GalleryPostAPIView(APIView):
             return status.HTTP_404_NOT_FOUND 
 
     def get(self, request, *args, **kwargs):
-        qs = UserGallery.objects.all()
+        qs = UserGallery.objects.all().order_by('-created')
         serializer = self.serializer_class(qs, many=True)
         return Response({"data": serializer.data, "status": 200}, status=status.HTTP_200_OK)
     
