@@ -26,7 +26,7 @@ class RegisterAPIView(APIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response({"msg": "User Created Successfully!", "status": 200}, status=status.HTTP_200_OK)
+        return Response({"message": "User Created Successfully!", "status": 201}, status=status.HTTP_201_CREATED)
 
 
 class LoginAPIView(APIView):
@@ -94,7 +94,6 @@ class GalleryPostAPIView(APIView):
             return UserGallery.objects.get(id=pk)
         except UserGallery.DoesNotExist:
             return status.HTTP_404_NOT_FOUND 
-        return super().get_object()
 
     def get(self, request, *args, **kwargs):
         qs = UserGallery.objects.all()
@@ -102,7 +101,8 @@ class GalleryPostAPIView(APIView):
         return Response({"data": serializer.data, "status": 200}, status=status.HTTP_200_OK)
     
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data = request.data)
+        print(request.data)
+        serializer = self.serializer_class(data = request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save(user=self.request.user)
         return Response({"message": "Successfully uploaded!", "status": 201}, status=status.HTTP_201_CREATED)

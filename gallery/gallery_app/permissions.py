@@ -9,6 +9,7 @@ class OwnObjectPermission(BasePermission):
     message = "Not Authorized!"
 
     def has_object_permission(self, request, view, obj):
+        print(request.user)
         if request.method in SAFE_METHODS or request.method in self.allowed_methods:
             return True
         return obj.user == request.user

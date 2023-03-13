@@ -24,6 +24,8 @@ class UserGallery(models.Model):
     image_post = models.ImageField(upload_to='userprofile/images/', null=True, blank=True)
     video_post = models.FileField(upload_to='userprofile/videos/', null=True, blank=True)
     post_caption = models.TextField(null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.user.email

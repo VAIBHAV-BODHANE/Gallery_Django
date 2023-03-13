@@ -9,11 +9,14 @@ class SafeJWTAuthentication(BaseAuthentication):
     """Custom authentication for JWT"""
 
     def authenticate(self, request):
+        print('cookies============', request.META.get('HTTP_AUTHORIZATION'))
         UserProfile = get_user_model()
-
         token = request.COOKIES.get('jwt', None)
 
         if not token:
+            token = request.META.get('HTTP_AUTHORIZATION', None)
+        print('token===================', token)
+        if not token or token=='null':
             raise AuthenticationFailed('Unauthenticated!')
         
         try:
