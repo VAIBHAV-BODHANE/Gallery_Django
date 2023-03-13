@@ -1,4 +1,4 @@
-# emptracker-django
+# Gallery Manager
 
 * Python (3.8, 3.9)
 * Django (3.0, 3.1)
